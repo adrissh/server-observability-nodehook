@@ -1,0 +1,13 @@
+#nodeJS
+.env
+/node_modules
+/.vscode
+
+# Ignore all .log files (anywhere)
+*.log
+
+
+
+# Editor config
+.vscode/
+.idea/
