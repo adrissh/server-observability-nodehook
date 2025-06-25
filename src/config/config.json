@@ -1,0 +1,10 @@
+{
+    "messages": {
+        "serverDown": "{icon} FIRING: Server Down\n\n🖥️ Instance: {resource}\n📛 Severity: {severity}\n📄 Description: {description}\n⏱️ Detected At: {detected}",
+        "resolved": "✅ RESOLVED: Server Down\n🖥️ Instance: {resource}\n📛 Severity: {severity}\n📄 Description: {description}\n⏱️ Detected At: {detected}",
+        "memoryUsageFiring": "{icon}  FIRING: High Memory Usage\n\n🖥️  Instance: {resource}\n📊 Usage: {value}%\n📛 Severity: {severity}\n📄 Description: {description}\n⏱️ Detected At: {startsAt}",
+        "memoryUsageResolved": "✅ RESOLVED: Memory Usage Normalized\n\n🖥️  Instance: {resource}\n📊 Usage: {value}%\n📄 Description: CPU usage is back to normal.\n⏱️ Resolved At: {endsAt}",
+        "cpuUsageFiring": "{icon}  FIRING: High CPU Usage\n\n🖥️  Instance: {resource}\n📊 Usage: {value}%\n📛 Severity: {severity}\n📄 Description: {description}\n⏱️ Detected At: {startsAt}",
+        "cpuUsageResolved": "✅ RESOLVED: CPU Usage Normalized\n\n🖥️  Instance: {resource}\n📊 Usage: {value}%\n📄 Description: CPU usage is back to normal.\n⏱️ Resolved At: {endsAt}"
+    }
+}
