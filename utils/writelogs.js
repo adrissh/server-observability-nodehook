@@ -24,7 +24,6 @@ const writeLog = (message,level)=>{
     }catch(error){
         console.log(error)
     }
-
 }
 
 module.exports = writeLog
