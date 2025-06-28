@@ -1,0 +1,76 @@
+groups:
+  - name: server-status-rules
+    rules:
+      - alert: ServerDown
+        expr: up == 0
+        for: 2m
+        labels:
+          alert_type: server
+          severity: critical
+        annotations:
+          description: "Instance {{ $labels.instance }} is DOWN!"
+
+  - name: memory-usage-rules
+    rules:
+      - alert: HighMemoryUsageWarning
+        expr: |
+           (100 * ((node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes) >= 70)
+           and
+           (100 * ((node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes) < 85)  
+           and on(instance)
+           (up == 1)
+        for: 2m
+        labels:
+          severity: warning
+          alert_type: memory
+        annotations:
+          summary: "High Memory Usage on {{ $labels.instance }}"
+          description: |
+            Current memory usage is {{ $value | printf "%.2f" }}%, which exceeds the defined threshold of 70%.
+          memory_usage: "{{ printf \"%.2f\" $value }}"
+
+      - alert: HighMemoryUsageCritical
+        expr: |
+          (100 * ( (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes ) >= 85)
+          and on (instance)
+          (up == 1)
+        for: 2m
+        labels:
+          severity: critical
+          alert_type: memory
+        annotations:
+          summary: "High Memory Usage on {{ $labels.instance }}"
+          description: |
+            Current memory usage is {{ $value | printf "%.2f" }}%, which exceeds the defined threshold of 85%.
+          memory_usage: '{{ printf "%.2f" $value }}'
+
+  - name: cpu-usage-rules
+    rules:
+      - alert: HighCpuUsageWarning
+        expr: |
+          instance:cpu_usage_percent >= 70
+          and instance:cpu_usage_percent < 85
+          and on(instance) (up == 1)          
+        for: 2m
+        labels:
+          severity: warning
+          alert_type: cpu
+        annotations:
+          summary: "High CPU Usage on {{ $labels.instance }}"
+          description: |
+            Current CPU usage is {{ $value | printf "%.2f" }}%, which exceeds the defined threshold of 70%.
+          cpu_usage: '{{ printf "%.2f" $value }}'
+
+      - alert: HighCpuUsageCritical
+        expr: |
+          instance:cpu_usage_percent >= 85
+          and on(instance) (up == 1)         
+        for: 2m
+        labels:
+          severity: critical
+          alert_type: cpu
+        annotations:
+          summary: "High CPU Usage on {{ $labels.instance }}"
+          description: |
+            Current CPU usage is {{ $value | printf "%.2f" }}%, which exceeds the defined threshold of 85%.
+          cpu_usage: '{{ printf "%.2f" $value }}'

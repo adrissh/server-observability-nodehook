@@ -1,0 +1,21 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  group_by: ["alertname","severity","instance"]
+  receiver: "webhook-telegram"
+  group_wait: 30s
+  group_interval: 1m
+  repeat_interval: 5m
+
+
+  routes:
+  - match:
+     alertname: HighMemoryUsageWarning
+     severity: warning
+    receiver: "webhook-telegram"
+
+receivers:
+  - name: "webhook-telegram"
+    webhook_configs:
+      - url: "http://127.0.0.1:4000/webhook-telegram"

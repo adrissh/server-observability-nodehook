@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['localhost:9093']  # Alamat Alertmanager
+
+rule_files:
+  - "alert.rules.yml"
+  - "recording.rules.yml"
+
+scrape_configs:
+  - job_name: 'webserver'
+    static_configs:
+      - targets: ['192.168.136.101:9100','192.168.136.102:9100','192.168.136.103:9100']
+

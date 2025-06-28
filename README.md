@@ -151,6 +151,17 @@ Ensure your system has the following installed before running the project:
 
 > All other dependencies will be installed automatically via `npm install` as defined in `package.json`.
 
+### 🔑 Telegram Bot Configuration
+
+Before running the application, create a `.env` file in the project root with your Telegram bot token and chat ID:
+
+```
+BOT_TOKEN=your-telegram-bot-token
+CHAT_ID=your-chat-id
+```
+
+> **Note:**  
+> The `.env` file is ignored by git for security reasons. Make sure to create and fill it with your own credentials.
 
 
 ### 🚀 Installation
@@ -172,11 +183,16 @@ npm start
 ```
 ### 🔧 Configuration Files
 
-You can find example configuration files in the `/config` directory:
+All main configuration files are organized into dedicated subfolders inside the `/config` directory:
 
-- `prometheus.yml`: Prometheus scrape config and alert rules
-- `alertmanager.yml`: Receiver and routing setup
-- `grafana-provisioning/`: Optional Grafana dashboard setup
+- `/config/prometheus/`  
+  Contains Prometheus configuration (`prometheus.yml , alert.rules.yml , recording.rules.yml`) and alert rules.
+
+- `/config/alertmanager/`  
+  Contains Alertmanager configuration (`alertmanager.yml`) for routing and receivers.
+
+> **Note:**  
+> There is no custom configuration for Grafana in this project. You can use Grafana directly and connect it to Prometheus as a data source.
 
 
 ### 📄 License

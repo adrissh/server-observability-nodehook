@@ -1,0 +1,6 @@
+groups:
+  - name: recording-rules
+    interval: 30s
+    rules:
+      - record: instance:cpu_usage_percent
+        expr: 100 * (1 - avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])))
